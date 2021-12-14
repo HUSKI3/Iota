@@ -44,5 +44,5 @@ def execute(command):
     try:
       if command.strip():
         subprocess.run(command.split(" "))
-    except Exception:
-      print("SHELL: command not found: {}".format(command.strip()))
+    except Exception as e:
+      print("SHELL: {}: {}".format(e,command.strip()))
