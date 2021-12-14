@@ -1,0 +1,9 @@
+{
+	"name":"Iota TecTone Android Cogs",
+	"version":"0.0.1",
+	"locations":[
+    "cogs/shell/package.json",
+    "cogs/yaml/package.json"
+  ],
+	"status":"rolling"
+}

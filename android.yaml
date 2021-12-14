@@ -1,0 +1,37 @@
+project: &project
+  name: "Android TecTone 23 Monolith"
+  type: "monolith"
+  maintainer:
+    name: "Artur Z"
+    email: "ignispy@protonmail.com"
+  children: [
+              "kernel",
+              "ui"
+            ]
+  depends: [
+              "cogs/shell",
+              "cogs/yaml"
+           ]
+
+scripts:
+  mono:
+    prep: |
+      echo '==> Installing dependencies'
+      sudo apt-get update
+      sudo apt-get install -y build-essential libncurses5-dev bzip2
+      sudo apt-get install repo
+      sudo apt-get install git-core gnupg flex bison build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 libncurses5 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig
+      repo init -u https://android.googlesource.com/platform/manifest
+      git config --global user.name $$project.maintainer.name
+      git config --global user.email $$project.maintainer.email
+    build: |
+      echo TODO
+    test: |
+      tests/run-all-tests.sh
+
+  kernel:
+    build: |
+      echo TODO
+    test: |
+      cat kernel/tests.txt
+  

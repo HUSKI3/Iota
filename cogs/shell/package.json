@@ -1,0 +1,11 @@
+{
+  "name":"shell",
+  "version":"1",
+  "functions":[
+    "echo",
+    "execute"
+  ],
+  "variables":"multi",
+  "depends":"cogs.shell"
+}
+
