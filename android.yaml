@@ -29,8 +29,7 @@ scripts:
       git config --global user.email ignispy@protonmail.com
       repo init -u https://android.googlesource.com/platform/manifest -b android-12.0.0_r16
       sudo sysctl -w net.ipv4.tcp_window_scaling=0
-      repo sync -j1
-      repo sync
+      repo sync -j8
     build: |
       echo ==> Building
       source build/envsetup.sh
