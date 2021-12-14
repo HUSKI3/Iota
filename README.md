@@ -1,3 +1,4 @@
+![Iota](logo-iota.png)
 # Iota
 > A quick and easy monolith project management utility
 
