@@ -110,12 +110,13 @@ class ezconfig:
 class function:
   def __init__(self, function):
     self.func = function
-  def __call__(self, *args, quiet=False):
+  def __call__(self, *args, quiet=False, vars=[]):
     _out = sys.stdout
     _err = sys.stderr
     if quiet:
       sys.stdout = open(os.devnull, 'a')
       sys.stderr = open(os.devnull, 'a')
+    args = list(args) + list(vars)
     ret = self.func(*args)
     if quiet:
       sys.stdout = _out

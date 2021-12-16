@@ -3,7 +3,7 @@ import subprocess
 def echo(*args):
   print(*args)
 
-def execute(command):
+def execute(command, env):
   if "|" in command:
     # save for restoring later on
     s_in, s_out = (0, 0)
@@ -31,7 +31,7 @@ def execute(command):
         os.close(fdout)
   
         try:
-            subprocess.run('bash'+cmd.strip().split())
+            subprocess.run(cmd.strip().split(), shell=True, env=env)
         except Exception:
             print("SHELL: command not found: {}".format(cmd.strip()))
   
@@ -42,7 +42,8 @@ def execute(command):
     os.close(s_out)
   else:
     try:
-      if command.strip():
-        subprocess.run('bash'+command.split(" "))
+      if command.strip:
+        subprocess.run(command.split(' '), shell=True, env=env)
     except Exception as e:
       print("SHELL: {}: {}".format(e,command.strip()))
+      print(f"ENV: {env}")

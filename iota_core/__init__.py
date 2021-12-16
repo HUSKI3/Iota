@@ -47,8 +47,6 @@ class shell:
   def _load_built_ins(self, path) -> dict:
     imp = hot.importer()
     imp.load_cogs(path) 
-    #imp.info('shell')
-    #imp.execute('shell','echo','booba','big')
     builtins = {}
     for cog in imp.get_cogs():
       builtins[cog] = {}
@@ -70,10 +68,14 @@ class builder:
     self.config         = self.get_config(config_path)
 
   def get_config(self, path):
-    config = self.shell.built_in['yaml']['load'](path, quiet=True)
+    config = self.shell.built_in['yaml']['load'](path, quiet=False)
     return config
 
   def script(self, script_name, project, args):
     if script_name in self.config['scripts'][project]:
+      if 'env' in self.config['scripts'][project]:
+        env_vars = self.config['scripts'][project]['env']
+      else:
+        env_vars=None
       for _ in self.config['scripts'][project][script_name].split('\n'):
-        self.shell.built_in['shell']['execute'](_, quiet=False)
+        self.shell.built_in['shell']['execute'](_, quiet=False, vars=[env_vars])
