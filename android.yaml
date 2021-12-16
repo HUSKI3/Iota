@@ -34,7 +34,7 @@ scripts:
       ccache -o compression=true
       bash source build/envsetup.sh
       lunch aosp_arm-eng
-      m
+      m -j8
     test: |
       echo ==> Running tests
       emulator
