@@ -31,7 +31,7 @@ def execute(command):
         os.close(fdout)
   
         try:
-            subprocess.run(cmd.strip().split())
+            subprocess.run('bash'+cmd.strip().split())
         except Exception:
             print("SHELL: command not found: {}".format(cmd.strip()))
   
