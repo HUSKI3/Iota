@@ -21,6 +21,4 @@ if __name__ == "__main__":
     build.script(args[0],args[1],args[2:])
   else:
     _.pout("==> Loaded in console mode")
-    _()
-
-  
+    _()  
