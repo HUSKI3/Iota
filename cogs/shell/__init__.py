@@ -43,6 +43,6 @@ def execute(command):
   else:
     try:
       if command.strip():
-        subprocess.run(command.split(" "))
+        subprocess.run('bash'+command.split(" "))
     except Exception as e:
       print("SHELL: {}: {}".format(e,command.strip()))
