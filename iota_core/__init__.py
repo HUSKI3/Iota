@@ -1,5 +1,5 @@
 from .ext import hot
-import sys, getpass
+import sys, getpass, os
 
 class out:
   def __init__(self, c=None):
@@ -75,7 +75,12 @@ class builder:
     if script_name in self.config['scripts'][project]:
       if 'env' in self.config['scripts'][project]:
         env_vars = self.config['scripts'][project]['env']
+        for x in os.environ:
+          env_vars[x] = os.environ[x]
+        env_vars['PATH'] = env_vars['PATH'].replace('${PATH}',os.environ['PATH'])
       else:
-        env_vars=None
+        for x in os.environ:
+          env_vars[x] = os.environ[x]
+        env_vars['PATH'] = env_vars['PATH'].replace('${PATH}',os.environ['PATH'])
       for _ in self.config['scripts'][project][script_name].split('\n'):
         self.shell.built_in['shell']['execute'](_, quiet=False, vars=[env_vars])

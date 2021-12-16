@@ -36,6 +36,7 @@ scripts:
       lunch aosp_arm-eng
       m
     test: |
+      echo ==> Running tests
       emulator
     env:
       USE_CCACHE: "1"
