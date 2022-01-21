@@ -71,6 +71,9 @@ class builder:
     config = self.shell.built_in['yaml']['load'](path, quiet=False)
     return config
 
+  def function(self, cog, func, *args, quiet=False):
+    return self.shell.built_in[cog][func](*args, quiet=quiet)
+
   def script(self, script_name, project, args):
     if script_name in self.config['scripts'][project]:
       if 'env' in self.config['scripts'][project]:
