@@ -7,7 +7,11 @@ class out:
 
   def __call__(self, *args, newline=True) -> int:
     try:
-      _ = str(*args)+'\n' if newline else str(*args)
+      f_args = []
+      for arg in args:
+        f_args.append(str(arg))
+      f_args = ' '.join(f_args) 
+      _ = str(f_args)+'\n' if newline else str(f_args)
       self.console.write(_)
     except Exception as e:
       sys.stderr.write(f'[Failed] -- {e} \n')

@@ -5,13 +5,24 @@ base_url = "https://github.com/{}/{}"
 class rep:
   def __init__(self, dict) -> None:
     self.all = dict
+    self.name = dict['url'].split('/')[-1]
+    self.url = dict['url']
+    self.content = len(dict['content'])
+
+  def __repr__(self):
+    return f"_({self.name}) @ {self.url} [{self.content}]"
     
+
+class reps:
+  def __init__(self, dict) -> None:
+    self.all = dict
+
   def tagged(self, tag:'tag you want the repos to match') -> list:
     x = {}
     for repo in self.all:
       if tag in self.all[repo]['tags']:
-        x[repo] = self.all[repo]
-    return rep(x)
+        x[repo] = rep(self.all[repo])
+    return x
 
 def get_repos(_User:'User to get the repos from'):
   g = Github()
@@ -29,6 +40,6 @@ def get_repos(_User:'User to get the repos from'):
       'content':cnt,
       'tags':tags
     }
-  return rep(repos)
+  return reps(repos)
 
 #get_repos('TecTone23-Mobile')

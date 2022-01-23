@@ -21,27 +21,30 @@ class AndroidBuilder(builder):
       cog_path=cogs,
       shell=self.shell
     )
-    
+
+    def print(*args):
+      self.shell.pout(*args)
+
+    # Process our config
+    # Use proc_load to process our custom yaml syntax first into pre
+    pre = self.function('yaml','proc_load',config, self.config)
+      
     # Prep for build
     self.repos = self.function('repo','get_repos','TecTone23-Mobile')
     self.tobuild = self.repos.tagged('autobuild')
-    print(self.tobuild)
-    
-    # Now run the actual scripts
+    for repo in self.tobuild:
+      print(repo, self.tobuild[repo])
+
+  def run(self):    
     self.script('test','mono',None)
 
-builder = AndroidBuilder(config, cogs, shell(cog_path=cogs))
+_ = shell(cog_path=cogs)
+builder = AndroidBuilder(config, cogs, _)
 
 if __name__ == "__main__":
   args = sys.argv[1:]
-  _ = shell(cog_path=cogs)
   if args:
-    build = builder(config_path=config,
-                    cog_path=cogs,
-                    shell=_
-                   )
-    _.pout("==> Loaded in builder mode")
-    build.script(args[0],args[1],args[2:])
+    builder.run()
   else:
     _.pout("==> Loaded in console mode")
-    _()  
+    _()
