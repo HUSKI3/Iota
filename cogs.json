@@ -3,7 +3,8 @@
 	"version":"0.0.1",
 	"locations":[
     "cogs/shell/package.json",
-    "cogs/yaml/package.json"
+    "cogs/yaml/package.json",
+    "cogs/repo/package.json"
   ],
 	"status":"rolling"
 }

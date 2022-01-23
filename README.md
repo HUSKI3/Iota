@@ -1,5 +1,5 @@
 ![Iota](logo-iota.png)
-# Iota
+# Iota - TecTone 23 Fork
 > A quick and easy monolith project management utility
 
 > PLEASE NOTE: This project is for TecTone23, so you will need to replace the configs that are built in with a plain version, as well as clean the cogs folder if you wish to use it!

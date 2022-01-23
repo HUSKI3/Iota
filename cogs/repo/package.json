@@ -1,0 +1,10 @@
+{
+  "name":"repo",
+  "version":"1",
+  "functions":[
+    "get_repos"
+  ],
+  "variables":"multi",
+  "depends":"cogs.repo",
+  "requires":["pygithub"]
+}
