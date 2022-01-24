@@ -4,8 +4,7 @@
 	"locations":[
     "cogs/shell/package.json",
     "cogs/yaml/package.json",
-    "cogs/repo/package.json",
-    "cogs/folders/package.json"
+    "cogs/repo/package.json"
   ],
 	"status":"rolling"
 }

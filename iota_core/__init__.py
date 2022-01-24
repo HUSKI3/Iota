@@ -7,11 +7,7 @@ class out:
 
   def __call__(self, *args, newline=True) -> int:
     try:
-      f_args = []
-      for arg in args:
-        f_args.append(str(arg))
-      f_args = ' '.join(f_args) 
-      _ = str(f_args)+'\n' if newline else str(f_args)
+      _ = str(*args)+'\n' if newline else str(*args)
       self.console.write(_)
     except Exception as e:
       sys.stderr.write(f'[Failed] -- {e} \n')
@@ -74,9 +70,6 @@ class builder:
   def get_config(self, path):
     config = self.shell.built_in['yaml']['load'](path, quiet=False)
     return config
-
-  def function(self, cog, func, *args, quiet=False):
-    return self.shell.built_in[cog][func](*args, quiet=quiet)
 
   def script(self, script_name, project, args):
     if script_name in self.config['scripts'][project]:

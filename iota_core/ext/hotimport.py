@@ -192,11 +192,7 @@ class importer:
           reqs = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
           installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
           for pkg in pkgs:
-            print(f'<<< Checking if {pkg} is present...', end='')
             if pkg not in [i.lower() for i in installed_packages]:
-              print('❌')
-              subprocess.run(f"python3 -m pip install {pkg} --disable-pip-version-check".split(" "), stdout=open(os.devnull, 'wb'))
-            else:
-              print('✅')
+              subprocess.run(f"python3 -m pip install {pkg}".split(" "))
         self.cogs[cogName] = cogTemp
         print(f"==> Loaded {cogName} at {cog}")
