@@ -32,8 +32,19 @@ class AndroidBuilder(builder):
     # Prep for build
     self.repos = self.function('repo','get_repos','TecTone23-Mobile')
     self.tobuild = self.repos.tagged('autobuild')
+    
+    # Now we have a dictionary of repos that we need to build
     for repo in self.tobuild:
-      print(repo, self.tobuild[repo])
+      #print(repo, self.tobuild[repo])
+
+      # Let's convert them to a folder structure using the folders cog
+      path = self.function('folders','from_name',
+                    repo,     # Folder to create
+                    '_',      # Seperator
+                    './.',    # Ignore this case
+                    'platform' 
+                   )
+      self.tobuild[repo].clone(path)
 
   def run(self):    
     self.script('test','mono',None)

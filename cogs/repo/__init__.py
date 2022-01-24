@@ -1,4 +1,5 @@
 from github import Github
+import os
 
 base_url = "https://github.com/{}/{}"
 
@@ -11,6 +12,14 @@ class rep:
 
   def __repr__(self):
     return f"_({self.name}) @ {self.url} [{self.content}]"
+
+  def clone(self, path):
+    old = os.path.dirname(os.path.realpath(__file__)).split('/cogs')[0]
+    os.system('pwd')
+    os.chdir(path)
+    os.system(f'git clone {self.url} .')
+    # Switch back
+    os.chdir(old)
     
 
 class reps:

@@ -1,0 +1,10 @@
+{
+  "name":"folders",
+  "version":"1",
+  "functions":[
+    "from_name"
+  ],
+  "variables":"multi",
+  "depends":"cogs.folders"
+}
+
