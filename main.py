@@ -9,23 +9,6 @@ import sys
 config = "android.yaml"
 cogs   = "cogs.json"
 
-# Here we can modify the builder to our heart's content
-class AndroidBuilder(builder):
-  
-  def __init__(self, config, cogs, shell) -> None:
-    self.repos = get_repos('TecTone23-Mobile')
-    # Init Shell
-    shell = shell(cog_path=cogs)
-    # Init our builder
-    builder.__init__(
-      config_path=config,
-      cog_path=cogs,
-      shell=shell
-    )
-    # Now run the actual scripts
-    self.script('test','mono',None)
-
-
 if __name__ == "__main__":
   args = sys.argv[1:]
   _ = shell(cog_path=cogs)
