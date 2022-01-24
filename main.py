@@ -12,30 +12,39 @@ cogs   = "cogs.json"
 # Here we can modify the builder to our heart's content
 class AndroidBuilder(builder):
   
-  def __init__(self, config, cogs, shell) -> None:
-    self.repos = get_repos('TecTone23-Mobile')
+  def __init__(self, config_path, cog_path, shell) -> None:
     # Init Shell
-    shell = shell(cog_path=cogs)
+    self.shell = shell
     # Init our builder
-    builder.__init__(
-      config_path=config,
+    builder.__init__(self,
+      config_path=config_path,
       cog_path=cogs,
-      shell=shell
+      shell=self.shell
     )
-    # Now run the actual scripts
+
+    def print(*args):
+      self.shell.pout(*args)
+
+    # Process our config
+    # Use proc_load to process our custom yaml syntax first into pre
+    pre = self.function('yaml','proc_load',config, self.config)
+      
+    # Prep for build
+    self.repos = self.function('repo','get_repos','TecTone23-Mobile')
+    self.tobuild = self.repos.tagged('autobuild')
+    for repo in self.tobuild:
+      print(repo, self.tobuild[repo])
+
+  def run(self):    
     self.script('test','mono',None)
 
+_ = shell(cog_path=cogs)
+builder = AndroidBuilder(config, cogs, _)
 
 if __name__ == "__main__":
   args = sys.argv[1:]
-  _ = shell(cog_path=cogs)
   if args:
-    build = builder(config_path=config,
-                    cog_path=cogs,
-                    shell=_
-                   )
-    _.pout("==> Loaded in builder mode")
-    build.script(args[0],args[1],args[2:])
+    builder.run()
   else:
     _.pout("==> Loaded in console mode")
-    _()  
+    _()
