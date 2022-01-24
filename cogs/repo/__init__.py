@@ -1,6 +1,37 @@
 from github import Github
+import os
 
 base_url = "https://github.com/{}/{}"
+
+class rep:
+  def __init__(self, dict) -> None:
+    self.all = dict
+    self.name = dict['url'].split('/')[-1]
+    self.url = dict['url']
+    self.content = len(dict['content'])
+
+  def __repr__(self):
+    return f"_({self.name}) @ {self.url} [{self.content}]"
+
+  def clone(self, path):
+    old = os.path.dirname(os.path.realpath(__file__)).split('/cogs')[0]
+    os.system('pwd')
+    os.chdir(path)
+    os.system(f'git clone {self.url} .')
+    # Switch back
+    os.chdir(old)
+    
+
+class reps:
+  def __init__(self, dict) -> None:
+    self.all = dict
+
+  def tagged(self, tag:'tag you want the repos to match') -> list:
+    x = {}
+    for repo in self.all:
+      if tag in self.all[repo]['tags']:
+        x[repo] = rep(self.all[repo])
+    return x
 
 def get_repos(_User:'User to get the repos from'):
   g = Github()
@@ -11,8 +42,13 @@ def get_repos(_User:'User to get the repos from'):
     cnt = []
     for file in contents:
       cnt.append(file.path)
+    tags = []
+    [tags.append(tag) for tag in repo.get_topics()]
     repos[repo.name] = {
       'url':base_url.format(_User, repo.name),
-      'content':cnt
+      'content':cnt,
+      'tags':tags
     }
-  print(repos)
+  return reps(repos)
+
+#get_repos('TecTone23-Mobile')
