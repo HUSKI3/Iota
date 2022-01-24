@@ -2,8 +2,7 @@
   "name":"yaml",
   "version":"1",
   "functions":[
-    "load",
-    "proc_load"
+    "load"
   ],
   "variables":"multi",
   "depends":"cogs.yaml",
