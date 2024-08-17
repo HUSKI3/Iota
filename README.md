@@ -2,8 +2,6 @@
 # Iota
 > A quick and easy monolith project management utility
 
-> PLEASE NOTE: This project is for TecTone23, so you will need to replace the configs that are built in with a plain version, as well as clean the cogs folder if you wish to use it!
-
 Iota provides a simple to use interface, you can either use the Console or the Builder modes. A Console is an interactive CLI utility which let's you call functions from your cogs or even build in there, while the builder is a single command which automates the building/testing/deployment processes.
 
 ### Console
